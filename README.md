@@ -27,28 +27,28 @@ Before you start, make sure you have:
 - npm
 - A MongoDB Atlas connection string or a local MongoDB instance
 
-## 1) Clone the repository
+## 1) Clone your fork or the main repo, and set up remotes
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/issixe/call-stack.git
 cd call-stack
 ```
 
 ## 2) Install dependencies
 
-Install the frontend dependencies:
+This is a Node project, so `npm install` reads the dependencies from each app's `package.json` automatically. 
+
+Run this in each app folder:
 
 ```bash
 cd mern/client
 npm install
-```
 
-Install the backend dependencies:
-
-```bash
 cd ../server
 npm install
 ```
+
+This installs the dependencies declared in each package automatically, including React/Vite for the frontend and Express/MongoDB for the backend.
 
 ## 3) Configure environment variables
 
@@ -57,20 +57,20 @@ This project expects the server to have access to these environment variables:
 - `ATLAS_URI` - your MongoDB connection string
 - `PORT` - the port for the Express API (default is `5050`)
 
-A sample file is included at the project root:
+There is a template file at [.env.example](.env.example). You can copy it to `config.env` and then point Node at that exact file when starting the server.
 
 ```bash
-cp .env.example .env
+cp .env.example mern/server/config.env
 ```
 
-Then update `.env` with your real values:
+Then update the copied file with your real values:
 
 ```env
-ATLAS_URI=mongodb+srv://<username>:<password>@<cluster-url>/<database>?retryWrites=true&w=majority
+ATLAS_URI=mongodb+srv://<username>:<password>@<cluster>.<projectId>.mongodb.net/employees?retryWrites=true&w=majority
 PORT=5050
 ```
 
-> The project reads values from `process.env`, so they must be available in the terminal session where the server starts. If you prefer, you can also export them directly in your shell instead of using a `.env` file.
+The app reads these values from `process.env`, and Node can load them automatically when the server starts with the env-file flag.
 
 ## 4) Start the backend
 
@@ -78,7 +78,7 @@ From the server folder:
 
 ```bash
 cd mern/server
-node server.js
+node --env-file=config.env server.js
 ```
 
 The API will run on:
@@ -118,28 +118,16 @@ The Vite config proxies `/record` requests to the backend at `localhost:5050`, s
 - Make sure your IP address is allowed in MongoDB Atlas if you are using Atlas
 - Confirm the database name in the URI is correct
 
-### Frontend cannot load records
-
-- Ensure the backend is running
-- Confirm the Vite dev server is running on port `5173`
-- Check the browser console and terminal output for API errors
-
 ### Port issues
 
 - If `PORT` is changed, update any local references accordingly
 - The default backend port is `5050`
 
-## Useful notes
-
-- The API routes are mounted under `/record`
-- The app stores employee records in the MongoDB database named `employees`
-- The frontend is built with React + Vite, and the backend is built with Express
-
 ## Team workflow
 
 1. Pull the latest changes
 2. Run `npm install` in both app folders
-3. Recreate or update your local `.env`
-4. Start the server
-5. Start the client
+3. Update your local `mern/server/config.env`
+4. Start the server with `node --env-file=config.env server.js`
+5. Start the client with `npm run dev`
 6. Verify functionality before committing changes
