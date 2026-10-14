@@ -8,7 +8,7 @@ Admin:
 - Supervisor can view every agent's costumer satisfaction score
 
 Agents:
-- 
+- Agent can complete different module by clicking on each box 
 
 
 ## Scoring Engine - how each answer's corresponding score is calculated 
