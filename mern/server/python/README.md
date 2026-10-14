@@ -1,7 +1,7 @@
-## Backend Design - Bear With Me 
+# Backend Design - Bear With Me 
 Language: Python 
 
-# User stories:
+## User stories:
 
 Admin:
 - Supervisor can input expected weight for different dimensions in score calculation of every user answer
@@ -11,5 +11,5 @@ Agents:
 - 
 
 
-# Scoring Engine - how each answer's corresponding score is calculated 
-# 
+## Scoring Engine - how each answer's corresponding score is calculated 
+
