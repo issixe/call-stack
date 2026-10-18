@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div className="w-full p-6">
-      <Navbar />
+      {/* add your <Navbar /> back here once you build a new one */}
       <Outlet />
     </div>
   );
