@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+:root {
+    --background: #F8F8F2;
+    --streak-light: #FBE8D6;
+    --streak-dark: #B87543;
+    --selection: #E5F2E9;
+    --selection-text: #287F6E;
+    --font-sans: "Nunito", sans-serif;
+}
