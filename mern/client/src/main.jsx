@@ -4,6 +4,8 @@ import ModuleComplete from "./pages/ModuleComplete";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
+import Learn from "./pages/Learn";
+import Manage from "./pages/Manage";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -12,6 +14,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
+      { path: "learn", element: <Learn /> },
+      { path: "manage", element: <Manage /> },
       // add new pages here, e.g. { path: "about", element: <About /> }
     ],
   },
