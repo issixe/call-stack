@@ -10,7 +10,7 @@ const uri = process.env.ATLAS_URI || "";
 async function seedDatabase() {
   if (!uri) {
     console.error("Error: ATLAS_URI not found in config.env");
-    process.exit(1);
+    process.exitCode = 1;
   }
 
   const client = new MongoClient(uri);
@@ -34,9 +34,9 @@ async function seedDatabase() {
     console.log(`Success! Successfully seeded ${result.insertedCount} lessons into Atlas.`);
   } catch (error) {
     console.error("Seeding failed:", error);
+    process.exitCode = 1;
   } finally {
     await client.close();
-    process.exit(0);
   }
 }
 
