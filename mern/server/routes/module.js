@@ -1,6 +1,3 @@
-//Copy of record.js as a template
-//TODO: Update to be accurate
-
 import express from "express";
 
 // This will help us connect to the database
@@ -11,22 +8,22 @@ import { ObjectId } from "mongodb";
 
 // router is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
+// The router will be added as a middleware and will take control of requests starting with path /module.
 const router = express.Router();
 
-// This section will help you get a list of all the records.
+// This section will help you get a list of all the modules.
 router.get("/", async (req, res) => {
-  let collection = await db.collection("records");
+  let collection = await db.collection("modules");
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
 
-// This section will help you get a single record by id
+// This section will help you get a single module by id
 router.get("/:id", async (req, res) => {
-  let collection = db.collection("records");
+  let collection = db.collection("modules");
   
   if (!ObjectId.isValid(req.params.id)) {
-    return res.status(400).json({ error: "Invalid record ID" });
+    return res.status(400).json({ error: "Invalid module ID" });
   }
 
   let query = { _id: new ObjectId(req.params.id) };
@@ -36,7 +33,7 @@ router.get("/:id", async (req, res) => {
   else res.status(200).send(result);
 });
 
-// This section will help you create a new record.
+// This section will help you create a new module.
 router.post("/", async (req, res) => {
   try {
     let newDocument = {
@@ -45,7 +42,7 @@ router.post("/", async (req, res) => {
       level: req.body.level,
     };
 
-    let collection = db.collection("records");
+    let collection = db.collection("modules");
     let result = await collection.insertOne(newDocument);
 
     res.status(201).json({
@@ -54,15 +51,15 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error adding record");
+    res.status(500).send("Error adding module");
   }
 });
 
-// This section will help you update a record by id.
+// This section will help you update a module by id.
 router.patch("/:id", async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ error: "Invalid record ID" });
+      return res.status(400).json({ error: "Invalid module ID" });
     }
 
     const query = { _id: new ObjectId(req.params.id) };
@@ -74,31 +71,31 @@ router.patch("/:id", async (req, res) => {
       },
     };
 
-    let collection = await db.collection("records");
+    let collection = await db.collection("modules");
     let result = await collection.updateOne(query, updates);
     res.send(result).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error updating record");
+    res.status(500).send("Error updating module");
   }
 });
 
-// This section will help you delete a record
+// This section will help you delete a module
 router.delete("/:id", async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ error: "Invalid record ID" });
+      return res.status(400).json({ error: "Invalid module ID" });
     }
 
     const query = { _id: new ObjectId(req.params.id) };
 
-    const collection = db.collection("records");
+    const collection = db.collection("modules");
     let result = await collection.deleteOne(query);
 
     res.send(result).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error deleting record");
+    res.status(500).send("Error deleting module");
   }
 });
 

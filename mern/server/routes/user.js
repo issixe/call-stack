@@ -1,6 +1,3 @@
-//Copy of record.js as a template
-//TODO: Update to be accurate
-
 import express from "express";
 
 // This will help us connect to the database
@@ -11,22 +8,22 @@ import { ObjectId } from "mongodb";
 
 // router is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
+// The router will be added as a middleware and will take control of requests starting with path /user.
 const router = express.Router();
 
-// This section will help you get a list of all the records.
+// This section will help you get a list of all the users.
 router.get("/", async (req, res) => {
-  let collection = await db.collection("records");
+  let collection = await db.collection("users");
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
 
-// This section will help you get a single record by id
+// This section will help you get a single user by id
 router.get("/:id", async (req, res) => {
-  let collection = db.collection("records");
+  let collection = db.collection("users");
   
   if (!ObjectId.isValid(req.params.id)) {
-    return res.status(400).json({ error: "Invalid record ID" });
+    return res.status(400).json({ error: "Invalid user ID" });
   }
 
   let query = { _id: new ObjectId(req.params.id) };
@@ -36,7 +33,7 @@ router.get("/:id", async (req, res) => {
   else res.status(200).send(result);
 });
 
-// This section will help you create a new record.
+// This section will help you create a new user.
 router.post("/", async (req, res) => {
   try {
     let newDocument = {
@@ -45,7 +42,7 @@ router.post("/", async (req, res) => {
       level: req.body.level,
     };
 
-    let collection = db.collection("records");
+    let collection = db.collection("users");
     let result = await collection.insertOne(newDocument);
 
     res.status(201).json({
@@ -54,15 +51,15 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error adding record");
+    res.status(500).send("Error adding user");
   }
 });
 
-// This section will help you update a record by id.
+// This section will help you update a user by id.
 router.patch("/:id", async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ error: "Invalid record ID" });
+      return res.status(400).json({ error: "Invalid user ID" });
     }
 
     const query = { _id: new ObjectId(req.params.id) };
@@ -74,31 +71,31 @@ router.patch("/:id", async (req, res) => {
       },
     };
 
-    let collection = await db.collection("records");
+    let collection = await db.collection("users");
     let result = await collection.updateOne(query, updates);
     res.send(result).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error updating record");
+    res.status(500).send("Error updating user");
   }
 });
 
-// This section will help you delete a record
+// This section will help you delete a user
 router.delete("/:id", async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ error: "Invalid record ID" });
+      return res.status(400).json({ error: "Invalid user ID" });
     }
 
     const query = { _id: new ObjectId(req.params.id) };
 
-    const collection = db.collection("records");
+    const collection = db.collection("users");
     let result = await collection.deleteOne(query);
 
     res.send(result).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error deleting record");
+    res.status(500).send("Error deleting user");
   }
 });
 
