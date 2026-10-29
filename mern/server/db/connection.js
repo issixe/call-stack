@@ -6,7 +6,7 @@ const client = new MongoClient(URI, {
     strict: true,
     deprecationErrors: true,
   },
-  appName: "devrel-github-javascript-mern",
+  appName: "bear-with-me",
 });
 try {
   // Connect the client to the server
@@ -17,5 +17,5 @@ try {
 } catch (err) {
   console.error(err);
 }
-let db = client.db("employees");
+let db = client.db("bear_db");
 export default db;
