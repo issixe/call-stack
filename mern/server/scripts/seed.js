@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { exampleLessons } from "./seedData.js";
+import { exampleLessons } from "../src/infrastructure/database/seeds/seedData.js";
 import dotenv from "dotenv";
 
 // Load Atlas environment variable manually since this runs standalone
