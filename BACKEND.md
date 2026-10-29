@@ -1,5 +1,62 @@
 # Backend 
 
+## Backend structure 
+```text
+mern/server/
+├── server.js
+├── package.json
+├── scripts/
+│   └── seed.js
+└── src/
+    ├── domain/
+    │   ├── entities/
+    │   │   ├── Module.js
+    │   │   ├── Lesson.js
+    │   │   ├── Session.js
+    │   │   └── AgentProfile.js
+    │   └── services/
+    │       ├── scoring.js
+    │       └── streak.js
+    ├── application/
+    │   ├── use_cases/
+    │   │   ├── ListModules.js
+    │   │   ├── ListLessons.js
+    │   │   ├── StartTrainingSession.js
+    │   │   ├── SubmitAnswer.js
+    │   │   ├── GetSessionResults.js
+    │   │   └── GetAgentProgress.js
+    │   └── ports/
+    │       ├── ModuleRepository.js
+    │       ├── LessonRepository.js
+    │       ├── SessionRepository.js
+    │       └── AgentProfileRepository.js
+    ├── interfaces/
+    │   └── http/
+    │       ├── routes/
+    │       │   ├── moduleRoutes.js
+    │       │   ├── lessonRoutes.js
+    │       │   ├── userRoutes.js
+    │       │   ├── sessionRoutes.js
+    │       │   └── agentProgressRoutes.js
+    │       ├── controllers/
+    │       │   ├── moduleController.js
+    │       │   ├── lessonController.js
+    │       │   ├── sessionController.js
+    │       │   └── agentProgressController.js
+    │       └── middleware/
+    │           └── errorHandler.js
+    └── infrastructure/
+        └── database/
+            ├── connection.js
+            ├── repositories/
+            │   ├── MongoModuleRepository.js
+            │   ├── MongoLessonRepository.js
+            │   ├── MongoSessionRepository.js
+            │   └── MongoAgentProfileRepository.js
+            └── seeds/
+                └── seedData.js
+```
+
 ## Vocabulary 
 
 |Concept|Definition|
@@ -39,3 +96,13 @@ Operations that accomplish specific application goals by coordinating domain log
 |---|---|
 |scoring|Validate scoring weights and calculate points for an answer|
 |streak|Calculate streak changes from lesson-completion dates|
+
+## Components responsibility 
+|Component|Job|
+|---|---|
+|Route|Defines an HTTP method and URL, such as POST /sessions, and directs matching requests to a controller.|
+|Controller|Handles HTTP communication: reads and validates request input, calls a use case, and converts its result into an HTTP response.|
+|Use case|Performs one application operation, such as starting a session. Coordinates domain behavior and repository calls to complete the operation|
+|Domain|Defines business concepts and rules. Contains entities such as Session and rules such as scoring, progression, and streak calculation. Works independently of HTTP and databases.|
+|Repository contract|Defines the data-access operations a use case needs, such as findById() and save(), without specifying a database technology.|
+|repository inplementation|Implements that contract using a storage technology such as MongoDB. Runs database queries and translates stored documents into application/domain data and back.|
