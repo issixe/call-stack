@@ -1,5 +1,5 @@
 # Backend 
-
+Not finalized -- more features could be added
 ## Backend structure 
 ```text
 mern/server/
