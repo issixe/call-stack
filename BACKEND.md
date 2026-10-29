@@ -11,6 +11,7 @@
 | Stage | One step in a lesson’s conversation, containing customer dialogue and available agent answers.|
 | Session | One agent’s attempt at a lesson, tracking their current stage, selected answers, score, mood, and status.|
 | Agent | The person who completing the training module |
+| Agent profile | Information about an agent, including their identity and training progress: overall points, daily streak, and completed lessons.|
 
 ## Use Cases 
 
@@ -23,5 +24,12 @@ Operations that accomplish specific application goals by coordinating domain log
 | StartTrainingSession | Start an agent’s attempt at a lesson with cScore = 0 and its starting stage; returns the opening customer response and available answers.|
 | SubmitAnswer | Process a selected answer, update points and conversation progress (returns the next customer answer), and finish the session when appropriat|
 | GetSessionResult | Retrieve the session’s score and answer history. | 
-| GetAgentProgress | view day streak and overall points / performance| 
+| GetAgentProgress | view day streak and overall points| 
 
+## Domain entities 
+|Entity|Data|
+|---|---|
+|Module|ID, title, description, lesson references|
+|Lesson|ID, title, starting stage, stages, customer responses, answer options and their scores|
+|Session|Agent ID, lesson ID, current stage, mood, cScore, answer history, status|
+|AgentProfile|Agent identity, overall points, completed lessons, streak information| 
