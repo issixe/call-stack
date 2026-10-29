@@ -33,3 +33,9 @@ Operations that accomplish specific application goals by coordinating domain log
 |Lesson|ID, title, starting stage, stages, customer responses, answer options and their scores|
 |Session|Agent ID, lesson ID, current stage, mood, cScore, answer history, status|
 |AgentProfile|Agent identity, overall points, completed lessons, streak information| 
+
+## Domain service 
+|service file | what does it do|
+|---|---|
+|scoring|Validate scoring weights and calculate points for an answer|
+|streak|Calculate streak changes from lesson-completion dates|
