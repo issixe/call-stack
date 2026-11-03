@@ -12,7 +12,6 @@ import { getUserProgressOutputData } from './getUserProgressOutputData.js';
 export class getUserProgressInteractor extends getUserProgressInputBoundary {
     constructor ({ dataAccess, streakCalculator, outputBoundary }) {
         this.dataAccess = dataAccess;
-        this.streakCalculator = streakCalculator;
         this.outputBoundary = outputBoundary;
     }
 
@@ -27,7 +26,7 @@ export class getUserProgressInteractor extends getUserProgressInputBoundary {
             throw new Error(`User with ID ${agentId} not found`);
         }
 
-        const streak = this.streakCalculator.calculate({
+        const streak = this.calculateStreak({
             completedToday: userProfile.completedToday,
             timezone: userProfile.timezone
         });
@@ -41,4 +40,7 @@ export class getUserProgressInteractor extends getUserProgressInputBoundary {
 
         return this.outputBoundary.present(outputData);
 }
+    calculateStreak({ completedToday, timezone, now }) {
+        
+    }
 }
