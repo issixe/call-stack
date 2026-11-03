@@ -3,7 +3,7 @@
 import express from "express";
 
 // This will help us connect to the database
-import db from "../../../infrastructure/database/connection.js";
+import db from "../../../database/connection.js";
 
 // This help convert the id from string to ObjectId for the _id.
 import { ObjectId } from "mongodb";
