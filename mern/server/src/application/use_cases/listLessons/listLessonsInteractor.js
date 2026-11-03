@@ -2,31 +2,43 @@
 // 2. Check that the module exists.
 // 3. Load the lessons belonging to that module.
 // 4. Return lesson title and progress information
+// listLessonsInteractor.js
 
-export class ListLessons {
-  constructor(moduleData , lessonData) {
-    this.moduleData  = moduleData ;
-    this.lessonData = lessonData;
-  }
+import { listLessonsInputBoundary } from './listLessonsInputBoundary.js';
+import { listLessonsOutputData } from './listLessonsOutputData.js';
 
-  async execute(moduleId) {
-    if (!moduleId) {
-      throw new Error("Module ID is required");
+export class listLessonsInteractor extends listLessonsInputBoundary {
+    constructor({ moduleData, lessonData, outputBoundary }) {
+        super();
+
+        this.moduleData = moduleData;
+        this.lessonData = lessonData;
+        this.outputBoundary = outputBoundary;
     }
 
-    const module = await this.moduleData .findById(moduleId);
+    async execute({ moduleId }) {
+        if (!moduleId) {
+            throw new Error('Module ID is required');
+        }
 
-    if (!module) {
-      throw new Error("Module not found");
+        const module = await this.moduleData.findById(moduleId);
+
+        if (!module) {
+            throw new Error('Module not found');
+        }
+
+        const lessons = await this.lessonData.findByModuleId(moduleId);
+
+        const outputData = new listLessonsOutputData({
+            moduleId,
+            lessons: lessons.map((lesson) => ({
+                id: lesson.id,
+                title: lesson.title,
+                startingStage: lesson.startingStage,
+                stages: lesson.stages
+            }))
+        });
+
+        return this.outputBoundary.present(outputData);
     }
-
-    const lessons = await this.lessonData.findByModuleId(moduleId);
-
-    return lessons.map((lesson) => ({
-      id: lesson.id,
-      title: lesson.title,
-      startingStage: lesson.startingStage,
-      stages: lesson.stages,
-    }));
-  }
 }

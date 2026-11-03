@@ -2,19 +2,30 @@
 
 // 1. Load available training modules from the module repository.
 // 2. Return module summaries for display, such as title, description, status (completed / n/m lessons completed), and any other relevant metadata.
-export class ListModules {
-  constructor(moduleData) {
-    this.moduleData = moduleData;
-  }
+// ListModulesInteractor.js
+import { listModulesInputBoundary } from './listModulesInputBoundary.js';
+import { listModulesOutputData } from './listModulesOutputData.js';
 
-  async execute() {
-    const modules = await this.moduleData.findAll();
+export class ListModulesInteractor extends listModulesInputBoundary {
+    constructor({ moduleData, outputBoundary }) {
+        super();
 
-    return modules.map((module) => ({
-      id: module.id,
-      title: module.title,
-      description: module.description,
-      lessonReferences: module.lessonReferences,
-    }));
-  }
+        this.moduleData = moduleData;
+        this.outputBoundary = outputBoundary;
+    }
+
+    async execute() {
+        const modules = await this.moduleData.findAll();
+
+        const outputData = new listModulesOutputData({
+            modules: modules.map((module) => ({
+                id: module.id,
+                title: module.title,
+                description: module.description,
+                lessonReferences: module.lessonReferences
+            }))
+        });
+
+        return this.outputBoundary.present(outputData);
+    }
 }
