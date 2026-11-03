@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --env-file=config.env server.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node src/database/seeds/seed.js"
   },
   "keywords": [],
   "author": "",

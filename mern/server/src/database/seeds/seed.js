@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { exampleLessons } from "../src/infrastructure/database/seeds/seedData.js";
+import { exampleLessons } from "../seeds/seedData.js";
 import dotenv from "dotenv";
 
 // Load Atlas environment variable manually since this runs standalone
@@ -18,7 +18,7 @@ async function seedDatabase() {
   try {
     console.log("Connecting to MongoDB Atlas...");
     await client.connect();
-    
+
     // Target database
     const db = client.db("bear_db");
     const lessonsCollection = db.collection("lessons");
@@ -31,7 +31,9 @@ async function seedDatabase() {
     console.log(`Inserting ${exampleLessons.length} default lessons...`);
     const result = await lessonsCollection.insertMany(exampleLessons);
 
-    console.log(`Success! Successfully seeded ${result.insertedCount} lessons into Atlas.`);
+    console.log(
+      `Success! Successfully seeded ${result.insertedCount} lessons into Atlas.`,
+    );
   } catch (error) {
     console.error("Seeding failed:", error);
     process.exitCode = 1;

@@ -1,7 +1,9 @@
+//Just reference code for routing, not accurate for file name
+
 import express from "express";
 
 // This will help us connect to the database
-import db from "../../../infrastructure/database/connection.js";
+import db from "../../../database/connection.js";
 
 // This help convert the id from string to ObjectId for the _id.
 import { ObjectId } from "mongodb";
@@ -21,7 +23,7 @@ router.get("/", async (req, res) => {
 // This section will help you get a single lesson by id
 router.get("/:id", async (req, res) => {
   let collection = db.collection("lessons");
-  
+
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: "Invalid lesson ID" });
   }
