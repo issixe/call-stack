@@ -5,20 +5,40 @@
 // 4. Return overall points, current streak,
 //    and completed-lesson progress.
 // 5. Do not award points or record a new completion.
+import { getUserProgressInputBoundary } from './getUserProgressInputBoundary.js';
+import { getUserProgressOutputData } from './getUserProgressOutputData.js';
 
-export class getUserProgress {
-    constructor ({ agentProfileRepository, streakCalculator }) {
-        this.agentProfileRepository = agentProfileRepository;
+
+export class getUserProgressInteractor extends getUserProgressInputBoundary {
+    constructor ({ dataAccess, streakCalculator, outputBoundary }) {
+        this.dataAccess = dataAccess;
         this.streakCalculator = streakCalculator;
+        this.outputBoundary = outputBoundary;
     }
 
-    async execute ({ agentId, timeZone }) {
+    async execute ({ agentId }) {
         if (!agentId) {
             throw new Error('Agent ID is required');
         }
-        
-        const agentProfile = await this.agentProfileRepository.getByAgentId(agentId);
-        if (!agentProfile) {
-            throw new Error(`Agent profile not found for agent ID: ${agentId}`);
+
+        const userProfile = await this.dataAccess.getUserById(agentId);
+
+        if (!userProfile) {
+            throw new Error(`User with ID ${agentId} not found`);
         }
+
+        const streak = this.streakCalculator.calculate({
+            completedToday: userProfile.completedToday,
+            timezone: userProfile.timezone
+        });
+
+        const outputData = new getUserProgressOutputData({
+            agentId: userProfile.agentId,
+            streak: streak,
+            totalPoints: userProfile.totalPoints,
+            completedTasks: userProfile.completedTasks
+        });
+
+        return this.outputBoundary.present(outputData);
+}
 }
