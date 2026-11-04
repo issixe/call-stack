@@ -2,10 +2,10 @@ import { lessonCompleteInputBoundary } from './lessonCompleteInputBoundary.js';
 import { lessonCompleteOutputData } from './lessonCompleteOutputData.js';
 
 export class lessonCompleteInteractor extends lessonCompleteInputBoundary {
-    constructor({ dataAccess, outputBoundary }){
+    constructor({ dataAccess, presenter }){
         super();
         this.dataAccess = dataAccess;
-        this.outputBoundary = outputBoundary;
+        this.presenter = presenter;
     }
 
     async execute ({ agentId, sessionId }) {
@@ -34,20 +34,21 @@ export class lessonCompleteInteractor extends lessonCompleteInputBoundary {
         const today = new Date().toLocaleDateString('en-CA'); // date in YYYY-MM-DD format
         const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toLocaleDateString('en-CA');
 
-        if (!session.completed) {
-            if (agent.lastActivity == yesterday) {
-                agent.streak += 1;
-            }
-            else if (agent.lastActivity != today){
-                agent.streak = 1;
-            }
-            agent.totalPoints += session.cScore;
-            agent.lastActivity = today;
-            session.completed = true;
-
-            await this.dataAccess.updateSession(session);
-            await this.dataAccess.updateAgent(agent);
+        if (agent.lastActivity == yesterday) {
+            agent.streak += 1;
         }
+        else if (agent.lastActivity != today){
+            agent.streak = 1;
+        }
+
+        const prevScore = agent.lessonScores[session.sessionId] ?? 0;
+        agent.totalPoints += (session.cScore - prevScore);
+        agent.lessonScores[session.sessionId] = session.cScore;
+        agent.lastActivity = today;
+        session.completed = true;
+
+        await this.dataAccess.updateSession(session);
+        await this.dataAccess.updateAgent(agent);
 
         const outputData = new lessonCompleteOutputData({
             agentId: agent.agentId,

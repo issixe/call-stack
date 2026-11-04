@@ -18,6 +18,7 @@ export class MongoLessonCompleteDataAccess extends lessonCompleteDataAccess {
         return {
             agentId: session.agentId?.toString(),
             sessionId: session._id.toString(),
+            lessonId: session.lessonId.toString(),
             cScore: session.cScore,
             completed: session.completed
         };
@@ -39,7 +40,8 @@ export class MongoLessonCompleteDataAccess extends lessonCompleteDataAccess {
             agentId: user._id.toString(),
             totalPoints: user.totalPoints,
             streak: user.streak,
-            lastActivity: user.lastActivity
+            lastActivity: user.lastActivity,
+            lessonScores: user.lessonScores
         };
     }
 
@@ -58,7 +60,8 @@ export class MongoLessonCompleteDataAccess extends lessonCompleteDataAccess {
             { $set: {
                     totalPoints: agent.totalPoints,
                     streak: agent.streak,
-                    lastActivity: agent.lastAcivitiy
+                    lastActivity: agent.lastAcivitiy,
+                    lessonScores: agent.lessonScores
             }}
         );
     }
