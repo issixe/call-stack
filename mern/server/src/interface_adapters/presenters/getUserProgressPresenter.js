@@ -1,7 +1,7 @@
 import { getUserProgressOutputData } 
-from '../../../application/use_cases/getUserProgress/getUserProgressOutputData.js';
+from '../../application/use_cases/getUserProgress/getUserProgressOutputData.js';
 import { getUserProgressOutputBoundary } 
-from '../../../application/use_cases/getUserProgress/getUserProgressOutputBoundary.js';
+from '../../application/use_cases/getUserProgress/getUserProgressOutputBoundary.js';
 
 export class getUserProgressPresenter extends getUserProgressOutputBoundary {
     async present(outputData) {
@@ -9,6 +9,7 @@ export class getUserProgressPresenter extends getUserProgressOutputBoundary {
             agentId: outputData.agentId,
             streak: outputData.streak,
             totalPoints: outputData.totalPoints,
-            completedTasks: outputData.completedTasks
+            completedModules: outputData.completedModules
         };
     }
+}
