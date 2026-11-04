@@ -1,8 +1,7 @@
-// 1. Receive the selected module ID.
-// 2. Check that the module exists.
-// 3. Load the lessons belonging to that module.
-// 4. Return lesson title and lesson information.
-// 5. Do not start a lesson or modify progress.
+// listLessonsOutputData.js
+// Output data for the "list lessons" use case.
+// A simple container holding the result: the moduleId and its lessons.
+// No logic, it just carries data from the interactor to the presenter.
 
 export class listLessonsOutputData {
     constructor({ moduleId, lessons }) {
