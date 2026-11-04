@@ -9,3 +9,10 @@
 // 4. Save the new session.
 // 5. Return the session ID, opening customer response,
 //    and available answer options without their scores.
+
+export class startSessionInputData {
+  constructor({ agentId, lessonId }) {
+    this.agentId = agentId;
+    this.lessonId = lessonId;
+  }
+}
