@@ -1,5 +1,7 @@
 import { getUserProgressInputBoundary } from 
-'../../applications/use_cases/getUserProgressInputBoundary.js';
+'../../application/use_cases/getUserProgressInputBoundary.js';
+import { getUserProgressInputData } from
+'../../application/use_cases/getUserProgressInputData.js';
 
 export function createGetUserProgressController({ getUserProgress }) {
   return async function getUserProgressController(req, res, next) {

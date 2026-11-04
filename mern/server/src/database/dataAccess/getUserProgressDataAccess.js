@@ -17,10 +17,9 @@ export class MongoUserProgressDataAccess extends getUserProgressDataAccess {
         }
         return {
             agentId: user._id.toString(),
-            completedToday: user.completedToday,
-            timezone: user.timezone,
             totalPoints: user.totalPoints,
-            completedTasks: user.completedTasks
+            completedModules: user.completedModules,
+            streak: user.streak
         }
 
     }

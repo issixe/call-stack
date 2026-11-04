@@ -11,6 +11,7 @@ import { getUserProgressOutputData } from './getUserProgressOutputData.js';
 
 export class getUserProgressInteractor extends getUserProgressInputBoundary {
     constructor ({ dataAccess, outputBoundary }) {
+        super();
         this.dataAccess = dataAccess;
         this.outputBoundary = outputBoundary;
     }
@@ -30,7 +31,7 @@ export class getUserProgressInteractor extends getUserProgressInputBoundary {
             agentId: userProfile.agentId,
             streak: userProfile.streak,
             totalPoints: userProfile.totalPoints,
-            completedTasks: userProfile.completedTasks
+            completedModules: userProfile.completedModules
         });
 
         return this.outputBoundary.present(outputData);
