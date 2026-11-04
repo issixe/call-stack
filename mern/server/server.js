@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import users from "./src/enterprise/entities/user.js";
-import modules from "./src/enterprise/entities/module.js";
-import lessons from "./src/enterprise/entities/lesson.js";
-import sessions from "./src/enterprise/entities/session.js";
+import users from "./src/interfaces/http/routes/userRoutes.js";
+import modules from "./src/interfaces/http/routes/moduleRoutes.js";
+import lessons from "./src/interfaces/http/routes/lessonRoutes.js";
+import sessions from "./src/interfaces/http/routes/sessionRoutes.js";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
