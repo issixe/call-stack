@@ -1,8 +1,8 @@
-// 1. Load available training modules from the module repository.
-// 2. Return module summaries for display.
-// 3. Include the module title, description,
-//    and references to its lessons.
-// 4. Do not start a lesson or modify agent progress.
+// listModulesOutputData.js
+// Output data for the "list modules" use case.
+// A simple container holding the result: the list of modules.
+// No logic, it just carries data from the interactor to the presenter.
+
 
 export class listModulesOutputData {
     constructor({ modules }) {

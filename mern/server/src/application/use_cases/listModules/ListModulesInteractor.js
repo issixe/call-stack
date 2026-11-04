@@ -1,8 +1,12 @@
-// ListModules.js
-
-// 1. Load available training modules from the module repository.
-// 2. Return module summaries for display, such as title, description, status (completed / n/m lessons completed), and any other relevant metadata.
 // ListModulesInteractor.js
+// Business logic for the "list modules" use case.
+// 1. Load all modules from the module data access.
+// 2. Return each module's id, title, description and lessonReferences.
+//
+// Dependencies (injected through the constructor):
+//  - moduleData: loads modules
+//  - outputBoundary: receives the result
+
 import { listModulesInputBoundary } from './listModulesInputBoundary.js';
 import { listModulesOutputData } from './listModulesOutputData.js';
 
