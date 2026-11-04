@@ -4,7 +4,6 @@
 
 export class listLessonsInputData {
     constructor({ moduleId }) {
-        this.mod
-        uleId = moduleId;
+        this.moduleId = moduleId;
     }
 }
