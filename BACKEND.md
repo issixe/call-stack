@@ -81,7 +81,7 @@ Operations that accomplish specific application goals by coordinating domain log
 | StartTrainingSession | Start an agent’s attempt at a lesson with cScore = 0 and its starting stage; returns the opening customer response and available answers.|
 | SubmitAnswer | Process a selected answer, update points and conversation progress (returns the next customer answer), and finish the session when appropriat|
 | GetSessionResult | Retrieve the session’s score and answer history. | 
-| GetAgentProgress | view day streak and overall points| 
+| GetUserProgress | view day streak and overall points| 
 
 ## Domain entities 
 |Entity|Data|
