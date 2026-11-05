@@ -78,10 +78,12 @@ Operations that accomplish specific application goals by coordinating domain log
 |---|---|
 | ListModules | Show the available training modules.|
 |ListLessons | Show the lessons within a selected module. |
-| StartTrainingSession | Start an agent’s attempt at a lesson with cScore = 0 and its starting stage; returns the opening customer response and available answers.|
+| StartSession | Start an agent’s attempt at a lesson with cScore = 0 and its starting stage; returns the opening customer response and available answers.|
 | SubmitAnswer | Process a selected answer, update points and conversation progress (returns the next customer answer), and finish the session when appropriat|
-| GetSessionResult | Retrieve the session’s score and answer history. | 
+| CompleteSession | Retrieve the session’s score and answer history. | 
 | GetUserProgress | view day streak and overall points| 
+| *GetStage | Giving the response and answer options based on the updated cScore |
+| GetPip| Get pip advice on the side | 
 
 ## Domain entities 
 |Entity|Data|
