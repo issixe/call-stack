@@ -5,7 +5,7 @@
  */
 export class Session {
   constructor(scenario) {
-    this.moduleId = scenario.module_id;
+    this.lessonId = scenario.lesson_id; 
     this.stageId = scenario.starting_stage;
     this.answerScores = [];
     this.cScore = 0;

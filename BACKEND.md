@@ -13,7 +13,7 @@ mern/server/
     │   │   ├── Module.js
     │   │   ├── Lesson.js
     │   │   ├── Session.js
-    │   │   └── AgentProfile.js
+    │   │   └── User.js
     │   └── services/
     │       ├── scoring.js
     │       └── streak.js
@@ -24,12 +24,12 @@ mern/server/
     │   │   ├── StartTrainingSession.js
     │   │   ├── SubmitAnswer.js
     │   │   ├── GetSessionResults.js
-    │   │   └── GetAgentProgress.js
+    │   │   └── GetUserProgress.js
     │   └── ports/
     │       ├── ModuleRepository.js
     │       ├── LessonRepository.js
     │       ├── SessionRepository.js
-    │       └── AgentProfileRepository.js
+    │       └── UserRepository.js
     ├── interfaces/
     │   └── http/
     │       ├── routes/
@@ -37,12 +37,12 @@ mern/server/
     │       │   ├── lessonRoutes.js
     │       │   ├── userRoutes.js
     │       │   ├── sessionRoutes.js
-    │       │   └── agentProgressRoutes.js
+    │       │   └── userRoutes.js
     │       ├── controllers/
     │       │   ├── moduleController.js
     │       │   ├── lessonController.js
     │       │   ├── sessionController.js
-    │       │   └── agentProgressController.js
+    │       │   └── userController.js
     │       └── middleware/
     │           └── errorHandler.js
     └── infrastructure/
@@ -52,7 +52,7 @@ mern/server/
             │   ├── MongoModuleRepository.js
             │   ├── MongoLessonRepository.js
             │   ├── MongoSessionRepository.js
-            │   └── MongoAgentProfileRepository.js
+            │   └── MongoUserRepository.js
             └── seeds/
                 └── seedData.js
 ```
